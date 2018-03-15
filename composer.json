@@ -1,0 +1,27 @@
+{
+    "name": "swissup/featured-attributes",
+    "description": "Featured attributes extension from Swissup",
+    "keywords": [
+        "featured attributes",
+        "attributes on category page"
+    ],
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "OSL-3.0",
+    "require": {
+        "swissup/core": "*"
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Swissup\\FeaturedAttributes\\": ""
+        }
+    },
+    "extra": {
+        "swissup": {
+            "links": {
+                "download"   : "https://github.com/swissup/featured-attributes"
+            }
+        }
+    }
+}

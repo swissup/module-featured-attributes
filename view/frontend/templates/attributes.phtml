@@ -1,0 +1,11 @@
+<?php $attributes = $block->getFeaturedAttributes(); ?>
+<?php if ($attributes): ?>
+<div class="product featured-attributes">
+    <?php foreach ($attributes as $attribute): ?>
+        <div class="attribute">
+            <span class="label"><?= $attribute['label'] ?>: </span>
+            <span class="value"><?= $attribute['value'] ?></span>
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>
