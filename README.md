@@ -1,5 +1,9 @@
 # Featured Attributes
 
+### Extension Manual
+
+http://docs.swissuplabs.com/m2/extensions/featured-attributes/
+
 ### Installation
 
 ```bash
