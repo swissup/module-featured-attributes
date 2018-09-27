@@ -9,11 +9,8 @@ http://docs.swissuplabs.com/m2/extensions/featured-attributes/
 ```bash
 cd <magento_root>
 composer config repositories.swissup composer https://docs.swissuplabs.com/packages/
-composer require swissup/featured-attributes:dev-master --prefer-source
-bin/magento module:enable\
-    Swissup_Core\
-    Swissup_FeaturedAttributes
-
+composer require swissup/module-featured-attributes --prefer-source
+bin/magento module:enable Swissup_Core Swissup_FeaturedAttributes
 bin/magento setup:upgrade
 ```
 
