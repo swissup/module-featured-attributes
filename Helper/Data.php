@@ -24,13 +24,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->scopeConfig->getValue($key, ScopeInterface::SCOPE_STORE);
     }
 
+    /**
+     *
+     * @return boolean
+     */
     public function isEnabled()
     {
-        return (bool)$this->getConfig(self::XML_PATH_ENABLED);
+        return (bool) $this->getConfig(self::XML_PATH_ENABLED);
     }
 
+    /**
+     *
+     * @return array
+     */
     public function getAttributes()
     {
-        return $this->getConfig(self::XML_PATH_ATTRIBUTES);
+        return array_filter(explode(',', $this->getConfig(self::XML_PATH_ATTRIBUTES)));
     }
 }

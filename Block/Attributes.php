@@ -19,6 +19,18 @@ class Attributes extends \Magento\Framework\View\Element\Template
     private $product = null;
 
     /**
+     *
+     * @var array|null
+     */
+    private $attributeCodes = null;
+
+    /**
+     *
+     * @var array
+     */
+    private $loadedAttributes = [];
+
+    /**
      * Construct
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -55,6 +67,37 @@ class Attributes extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     *
+     * @return array
+     */
+    private function getAttributeCodes()
+    {
+        if ($this->attributeCodes === null) {
+            $this->attributeCodes = $this->helper->getAttributes();
+        }
+        return $this->attributeCodes;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    private function getProductAttributes()
+    {
+        $attributeCodes = $this->getAttributeCodes();
+        $productId = $this->product->getId();
+        $key = $productId . '-' . implode('-', $attributeCodes);
+
+        if (!isset($this->loadedAttributes[$key])) {
+            $this->loadedAttributes[$key] = $this->product->getResource()
+                ->load($this->product, $productId, $attributeCodes)
+                ->getSortedAttributes();
+        }
+
+        return $this->loadedAttributes[$key];
+    }
+
+    /**
      * Get list of featured attributes for product
      * @return array|boolean
      */
@@ -65,15 +108,23 @@ class Attributes extends \Magento\Framework\View\Element\Template
         }
 
         $attributes = [];
-        $codes = array_filter(explode(',', $this->helper->getAttributes()));
+        $attributeCodes = $this->getAttributeCodes();
 
-        foreach ($codes as $code) {
-            if (!is_null($this->product->getData($code))) {
-                $attribute = $this->product->getResource()->getAttribute($code);
+        // $productAttributes = $this->product->getAttributes();
+        $productAttributes = $this->getProductAttributes();
+
+        foreach ($attributeCodes as $attributeCode) {
+            if (isset($productAttributes[$attributeCode])
+                && !is_null($this->product->getData($attributeCode))
+            ) {
+                $attribute = $productAttributes[$attributeCode];
                 $label = $attribute->getStoreLabel();
                 $value = $attribute->getFrontend()->getValue($this->product);
                 if ($label && $value) {
-                    $attributes[] = ['label' => $label, 'value' => $value];
+                    $attributes[$attributeCode] = [
+                        'label' => $label,
+                        'value' => $value
+                    ];
                 }
             }
         }
