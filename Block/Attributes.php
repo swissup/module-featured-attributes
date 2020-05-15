@@ -91,7 +91,7 @@ class Attributes extends \Magento\Framework\View\Element\Template
         if (!isset($this->loadedAttributes[$key])) {
             $this->loadedAttributes[$key] = $this->product->getResource()
                 ->load($this->product, $productId, $attributeCodes)
-                ->getSortedAttributes();
+                ->getAttributesByCode();
         }
 
         return $this->loadedAttributes[$key];
