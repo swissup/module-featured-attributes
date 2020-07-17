@@ -19,23 +19,9 @@ class Attributes extends \Magento\Framework\View\Element\Template
     private $product = null;
 
     /**
-     *
-     * @var array|null
-     */
-    private $attributeCodes = null;
-
-    /**
-     *
-     * @var array
-     */
-    private $loadedAttributes = [];
-
-    /**
-     * Construct
-     *
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Swissup\FeaturedAttributes\Helper\Data $helper
-     * @param array $data
+     * @param \Swissup\FeaturedAttributes\Helper\Data          $helper
+     * @param array                                            $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -67,38 +53,8 @@ class Attributes extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     *
-     * @return array
-     */
-    private function getAttributeCodes()
-    {
-        if ($this->attributeCodes === null) {
-            $this->attributeCodes = $this->helper->getAttributes();
-        }
-        return $this->attributeCodes;
-    }
-
-    /**
-     *
-     * @return array
-     */
-    private function getProductAttributes()
-    {
-        $attributeCodes = $this->getAttributeCodes();
-        $productId = $this->product->getId();
-        $key = $productId . '-' . implode('-', $attributeCodes);
-
-        if (!isset($this->loadedAttributes[$key])) {
-            $this->loadedAttributes[$key] = $this->product->getResource()
-                ->load($this->product, $productId, $attributeCodes)
-                ->getAttributesByCode();
-        }
-
-        return $this->loadedAttributes[$key];
-    }
-
-    /**
      * Get list of featured attributes for product
+     *
      * @return array|boolean
      */
     public function getFeaturedAttributes()
@@ -108,16 +64,8 @@ class Attributes extends \Magento\Framework\View\Element\Template
         }
 
         $attributes = [];
-        $attributeCodes = $this->getAttributeCodes();
-
-        // $productAttributes = $this->product->getAttributes();
-        $productAttributes = $this->getProductAttributes();
-
-        foreach ($attributeCodes as $attributeCode) {
-            if (isset($productAttributes[$attributeCode])
-                && !is_null($this->product->getData($attributeCode))
-            ) {
-                $attribute = $productAttributes[$attributeCode];
+        foreach ($this->helper->getAttributes() as $attributeCode => $attribute) {
+            if (!is_null($this->product->getData($attributeCode))) {
                 $label = $attribute->getStoreLabel();
                 $value = $attribute->getFrontend()->getValue($this->product);
                 if ($label && $value) {
