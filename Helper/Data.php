@@ -8,6 +8,9 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class Data extends Helper\AbstractHelper
 {
+    /**
+     * @var array
+     */
     private $attributes;
 
     /**
@@ -24,6 +27,11 @@ class Data extends Helper\AbstractHelper
      */
     const XML_PATH_ATTRIBUTES = 'featuredattributes/general/attributes';
 
+    /**
+     * @param ProductAttributeRepositoryInterface $attributeRepository
+     * @param SearchCriteriaBuilder               $searchCriteriaBuilder
+     * @param Helper\Context                      $context
+     */
     public function __construct(
         ProductAttributeRepositoryInterface $attributeRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
