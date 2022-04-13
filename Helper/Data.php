@@ -71,7 +71,7 @@ class Data extends Helper\AbstractHelper
             $attributeCodes = array_filter(
                 explode(
                     ',',
-                    $this->getConfig(self::XML_PATH_ATTRIBUTES)
+                    (string) $this->getConfig(self::XML_PATH_ATTRIBUTES)
                 )
             );
             if ($attributeCodes) {
