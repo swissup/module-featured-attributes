@@ -1,0 +1,37 @@
+@critical: unsure;
+
+@featured-attributes__margin: 6px 0 0;
+@featured-attributes__font-size: 14px;
+@featured-attributes__line-height: 1.35em;
+@featured-attributes-value__color: #777;
+
+& when (@media-common = true) {
+& when (@critical = unsure), (@critical) {
+    .product.featured-attributes {
+        display: none;
+        .lib-css(margin, @featured-attributes__margin);
+        .lib-css(font-size, @featured-attributes__font-size);
+        .lib-css(line-height, @featured-attributes__line-height);
+
+        .value {
+            .lib-css(color, @featured-attributes-value__color);
+        }
+    }
+}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+& when (@critical = unsure), (@critical) {
+    .products-list .product.featured-attributes {
+        display: block;
+    }
+}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+& when (@critical = unsure), (@critical) {
+    .product.featured-attributes {
+        display: block;
+    }
+}
+}
