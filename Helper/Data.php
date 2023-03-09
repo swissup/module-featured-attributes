@@ -14,6 +14,16 @@ class Data extends Helper\AbstractHelper
     private $attributes;
 
     /**
+     * @var ProductAttributeRepositoryInterface
+     */
+    private $attributeRepository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    /**
      * Path to store config: extension enabled
      *
      * @var string
