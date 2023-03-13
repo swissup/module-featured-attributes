@@ -6,10 +6,10 @@
         "attributes on category page"
     ],
     "type": "magento2-module",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "license": "OSL-3.0",
     "require": {
-        "swissup/module-core": "^1.12.9"
+        "swissup/module-core": "^1.12.14"
     },
     "autoload": {
         "files": [ "registration.php" ],
