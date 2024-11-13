@@ -38,7 +38,7 @@ class Attributes extends \Magento\Framework\View\Element\Template
             $this->setData('template', self::DEFAULT_TEMPLATE);
         }
 
-        return parent::_construct();
+        parent::_construct();
     }
 
     /**
