@@ -1,10 +1,11 @@
+<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
 <?php $attributes = $block->getFeaturedAttributes(); ?>
 <?php if ($attributes): ?>
 <div class="product featured-attributes">
     <?php foreach ($attributes as $attribute): ?>
         <div class="attribute">
-            <span class="label"><?= $attribute['label'] ?>: </span>
-            <span class="value"><?= $attribute['value'] ?></span>
+            <span class="label"><?= $escaper->escapeHtml($attribute['label']) ?>: </span>
+            <span class="value"><?= $escaper->escapeHtml($attribute['value']) ?></span>
         </div>
     <?php endforeach; ?>
 </div>
